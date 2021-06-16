@@ -15,6 +15,7 @@ setup(
         'backoff==1.8.0',
         'singer-encodings @ git+https://github.com/Liftitapp/singer-encodings.git#egg=singer-encodings',
         'terminaltables==3.1.0',
+        'python-gnupg==0.4.7',
     ],
     extras_require={
         'dev': [
