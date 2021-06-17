@@ -79,7 +79,7 @@ class GnuPgManager:
             raise KeyImportError(message="No se encontro una llave valida para importar")
 
     @classmethod
-    def decrypt_data(cls, data: str, passphrase: str):
+    def decrypt_data(cls, data: str, passphrase: str, encoding: str = 'utf-8'):
         """
         Decrypt a data with a passphrase with gpg
         return str decrypt data.
@@ -92,13 +92,14 @@ class GnuPgManager:
         Keyword arguments:
         data       -- Data to decrypt
         passphrase -- Passphrase from a gpg_logic certificate
+        encoding -- Data encoding type
         """
 
         decrypted_data = cls.gpg.decrypt(data, passphrase=passphrase)
 
         try:
             if decrypted_data.ok:
-                return decrypted_data.data.decode("utf-8")
+                return decrypted_data.data.decode(encoding)
             else:
                 decrypt_error = decrypted_data.stderr
                 raise GpgDecryptError(message=str(decrypt_error))

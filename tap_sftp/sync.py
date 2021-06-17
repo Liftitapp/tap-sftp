@@ -78,7 +78,8 @@ def sync_file(conn, f, stream, table_spec, config=None):
             file_encrypt_data += line.decode('utf-8' + '\n')
 
         # LOGGER.info(file_encrypt_data)
-        decrypt_data = GnuPgManager.decrypt_data(data=file_encrypt_data, passphrase=passphrase)
+        encoding = table_spec.get('encoding') if table_spec.get('encoding') is not None else 'utf-8'
+        decrypt_data = GnuPgManager.decrypt_data(data=file_encrypt_data, passphrase=passphrase, encoding=encoding)
 
         LOGGER.info(decrypt_data)
         if decrypt_data:
